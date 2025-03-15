@@ -1,0 +1,42 @@
+{% extends 'text_image/base.html' %}
+
+{% block title %}小红书文生图 - 错误{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0">发生错误</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <h4 class="alert-heading">错误信息</h4>
+                    <p>{{ error_message }}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>可能的解决方案：</h5>
+                    <ul>
+                        <li>确保已经执行数据库迁移: <code>python manage.py migrate</code></li>
+                        <li>检查媒体目录是否存在并可写入</li>
+                        <li>确保应用程序有足够的权限创建和写入文件</li>
+                        <li>检查日志文件获取更多信息</li>
+                    </ul>
+                </div>
+                
+                <a href="{% url 'index' %}" class="btn btn-primary">返回首页</a>
+                
+                {% if traceback %}
+                <div class="mt-4">
+                    <h5>技术详情 (调试信息):</h5>
+                    <div class="bg-light p-3 border rounded">
+                        <pre class="text-danger" style="white-space: pre-wrap;">{{ traceback }}</pre>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
